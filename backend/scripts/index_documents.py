@@ -40,7 +40,7 @@ def index_docs():
         'AZURE_OPENAI_ENDPOINT',
         'AZURE_OPENAI_API_KEY',
         'AZURE_SEARCH_ENDPOINT',
-        'AZURE_SEARCH_INDEX_NAME'
+        'AZURE_SEARCH_INDEX_NAME',
         'AZURE_SEARCH_API_KEY'
     ]
 
@@ -64,7 +64,7 @@ def index_docs():
         logger.error("Please verify your Azure OpenAI deployment name and endpoint.")
         return
 
-     try:
+    try:
         # Vector store client targets an existing Azure Search index.
         logger.info("Initializing Azure AI Search vector store...")
         index_name = os.getenv("AZURE_SEARCH_INDEX_NAME")

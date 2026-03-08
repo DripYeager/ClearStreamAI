@@ -13,7 +13,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     )
-logging.getLogger("clearstreamai")
+logger = logging.getLogger("clearstreamai")
 
 def run_cli_simulation():
     '''
@@ -27,9 +27,9 @@ def run_cli_simulation():
     # Initial state payload passed to LangGraph.
     # Downstream nodes enrich this with transcript, OCR, and compliance results.
     initial_inputs= {
-        "video_url": "",
-        "video_id" : f"vid_{session_id}"
-        "compliance_results": [],
+        "video_url": "https://youtu.be/gj_QyeHTBiIQ",
+        "video_id" : f"vid_{session_id[:8]}",
+        "compliance_results" : [],
         "errors": []
     }
 

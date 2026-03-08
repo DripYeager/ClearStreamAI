@@ -20,7 +20,7 @@ def index_video_node(state: VideoAuditState) -> Dict[str, Any]:
     '''
     Download the video from url and uploads to Azure video indexer
     Extracts the insight
-    ''''
+    '''
     video_url = state.get('video_url')
     video_id_input= state.get('video_id','vid_demo')
 
@@ -45,7 +45,7 @@ def index_video_node(state: VideoAuditState) -> Dict[str, Any]:
 
         # Wait for Azure indexing to finish before extracting normalized state fields
         # that downstream graph nodes consume (transcript, OCR, metadata, etc.).
-        raw_insights= vi_service.wait_for_video_processing(azure_video_id)
+        raw_insights= vi_service.wait_for_processing(azure_video_id)
         clean_data= vi_service.extract_data(raw_insights)
         logger.info(f"----[Node: indexer] Extraction Completed")
         return clean_data
@@ -87,7 +87,7 @@ def audit_content_node(state: VideoAuditState) -> Dict[str, Any]:
     # Azure AI Search provides regulation context for RAG grounding.
     # Using env vars keeps deployment-specific values out of code.
     vector_store= AzureSearch(
-        azure_endpoint=os.getenv("AZURE_SEARCH_ENDPOINT"),
+        azure_search_endpoint=os.getenv("AZURE_SEARCH_ENDPOINT"),
         azure_search_key=os.getenv("AZURE_SEARCH_API_KEY"),
         index_name=os.getenv("AZURE_SEARCH_INDEX_NAME"),
         embedding_function=embeddings.embed_query

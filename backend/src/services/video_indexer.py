@@ -17,6 +17,7 @@ class VideoIndexerService:
         self.resource_group= os.getenv("AZURE_RESOURCE_GROUP")
         self.vi_name= os.getenv("AZURE_VI_NAME")
         self.credential= DefaultAzureCredential()
+        self.tenant_id = os.getenv("AZURE_TENANT_ID")
 
     def get_access_token(self):
         try:
@@ -59,13 +60,13 @@ class VideoIndexerService:
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     }}
 
-    try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([video_url])
-        logger.info("Download complete.")
-        return output_path
-    except Exception as e:
-        raise Exception(f"YouTube Download Failed: {str(e)}")
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([video_url])
+            logger.info("Download complete.")
+            return output_path
+        except Exception as e:
+            raise Exception(f"YouTube Download Failed: {str(e)}")
 
     def upload_video(self, video_path, video_name):
         '''
