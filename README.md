@@ -132,32 +132,37 @@ pip install -r requirements.txt
 Create a `.env` in project root with values for:
 
 ```env
-# Azure OpenAI
-AZURE_OPENAI_ENDPOINT=
-AZURE_OPENAI_API_KEY=
-AZURE_OPENAI_API_VERSION=
-AZURE_OPENAI_CHAT_DEPLOYMENT=
-AZURE_OPENAI_EMBEDDING_DEPLOYMENT=
+# --- AZURE STORAGE ---
+AZURE_STORAGE_CONNECTION_STRING=""
 
-# Azure AI Search
-AZURE_SEARCH_ENDPOINT=
-AZURE_SEARCH_API_KEY=
-AZURE_SEARCH_INDEX_NAME=
+# --- AZURE OPENAI ---
+AZURE_OPENAI_API_KEY=""
+AZURE_OPENAI_ENDPOINT="https://<your-resource-name>[.cognitiveservices.azure.com/](https://.cognitiveservices.azure.com/)"
+AZURE_OPENAI_API_VERSION="2024-12-01-preview"
+AZURE_OPENAI_CHAT_DEPLOYMENT="gpt-4o"
+AZURE_OPENAI_EMBEDDING_DEPLOYMENT="text-embedding-3-small"
 
-# Azure Video Indexer + ARM context
-AZURE_VI_ACCOUNT_ID=
-AZURE_VI_LOCATION=
-AZURE_SUBSCRIPTION_ID=
-AZURE_RESOURCE_GROUP=
-AZURE_VI_NAME=
+# --- AZURE AI SEARCH (The Knowledge Base) ---
+AZURE_SEARCH_ENDPOINT="https://<your-search-name>.search.windows.net"
+AZURE_SEARCH_API_KEY=""
+AZURE_SEARCH_INDEX_NAME="compliance-rules-index"
 
-# Azure auth (for EnvironmentCredential option)
-AZURE_TENANT_ID=
-AZURE_CLIENT_ID=
-AZURE_CLIENT_SECRET=
+# --- AZURE VIDEO INDEXER (Identity Auth) ---
+AZURE_VI_NAME="clearstreamai"
+AZURE_VI_LOCATION="eastus"
+AZURE_VI_ACCOUNT_ID=""
+AZURE_SUBSCRIPTION_ID=""
+AZURE_RESOURCE_GROUP="ClearStreamAI"
+AZURE_TENANT_ID=""
 
-# Optional observability
-APPLICATIONINSIGHTS_CONNECTION_STRING=
+# --- OBSERVABILITY (Azure Monitor) ---
+APPLICATIONINSIGHTS_CONNECTION_STRING=""
+
+# --- LANGSMITH (Tracing) ---
+LANGCHAIN_TRACING_V2="true"
+LANGCHAIN_ENDPOINT="[https://api.smith.langchain.com](https://api.smith.langchain.com)"
+LANGCHAIN_API_KEY=""
+LANGCHAIN_PROJECT="clear-stream-prod"
 ```
 
 > If using Azure CLI authentication, run `az login` and set the correct subscription.
